@@ -34,6 +34,13 @@ class Node(val name: String, val s: List[Path], val is_final: Boolean) {
 
 	def get_successors: List[Path] = successors
 
+	def find_paths_of_len(len: Int): Unit = {
+		val res = find_paths_of_length(len, "", List[Node](this))
+		for(i <- 0 until res._1.size) {
+			println(res._1(i) + " | " + Node.listToString(res._2(i)))
+		}
+	}
+
 	def find_paths(str: String): Unit = {
 		val res = find_paths_for_str(str.length, str, "", List[Node](this))
 		for(i <- 0 until res._1.size) {
@@ -58,3 +65,4 @@ object Path {
 		(for(i<-v) yield for(q<-t) yield Path(i, q)).flatten
 	def empty: List[Path] = List[Path]()
 }
+
